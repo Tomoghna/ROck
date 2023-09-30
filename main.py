@@ -1324,7 +1324,7 @@ async def stop(ctx):
   await ctx.send("The game has been stopped.")
 
 
-openai.api_key = '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'
+openai.api_key = '{OPEN-AI API KEY}'
 
 
 def generate_text(prompt):
