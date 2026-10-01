@@ -1,6 +1,7 @@
 process.loadEnvFile();
 
 const {
+  ActivityType,
   Client,
   EmbedBuilder,
   Events,
@@ -72,6 +73,13 @@ const slapReasons = [
   'being too silly', 'being too cool', 'no reason at all', 'being too savage',
   'stealing hearts', 'not studying', 'being too stressed',
 ];
+const activityDescriptions = [
+  'Breaking Bad', 'over the MODS', 'over the Server', 'the Bots', '| >help',
+  'Peaky Blinders', 'the sky', 'DMs', 'Youtube', 'Memes', 'over members',
+  '#Text Channels', 'Voice Channels', '| >help', '| >help', '| >help',
+  'Stranger Things', 'DMs', 'DMs', 'football', 'Soccer', 'UFC', 'WWE',
+  'NBA', 'the moon',
+];
 
 function profileEmbed(user, title) {
   return new EmbedBuilder()
@@ -88,6 +96,13 @@ async function fetchJson(url) {
 }
 
 client.once(Events.ClientReady, async readyClient => {
+  const updateActivity = () => {
+    const description = activityDescriptions[randomInt(activityDescriptions.length)];
+    readyClient.user.setActivity(description, { type: ActivityType.Watching });
+  };
+  updateActivity();
+  setInterval(updateActivity, 30_000);
+
   try {
     const guildId = process.env.DISCORD_GUILD_ID;
     if (guildId) {
