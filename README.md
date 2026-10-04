@@ -45,15 +45,24 @@ Remove that setting to register commands globally. Keep `.env` private; it is ex
 
 | Category | Commands |
 | --- | --- |
-| **Quick tools** | `/ping`, `/choose`, `/8ball`, `/coinflip`, `/roll`, `/emojify` |
-| **Server & profiles** | `/membercount`, `/serverinfo`, `/userinfo`, `/avatar` |
+| **Quick tools** | `/help`, `/ping`, `/choose`, `/8ball`, `/coinflip`, `/roll`, `/emojify` |
+| **Server & profiles** | `/membercount`, `/serverinfo`, `/userinfo`, `/avatar`, `/level`, `/leaderboard` |
 | **For fun** | `/slap`, `/bulla`, `/joke`, `/quote`, `/wiki` |
+| **Games** | `/tictactoe`, `/countingstart`, `/countingstop` |
 | **Moderation** | `/kick`, `/mute`, `/unmute`, `/warn` |
-| **Messaging** | `/dm` |
+| **Messaging** | `/dm`, `/send` |
 
-Commands with options guide you through their inputs in Discord. For example, `/choose` accepts comma-separated options, and `/userinfo` can take an optional member.
+Use `/help` for a categorized command guide. Commands with options guide you through their inputs in Discord. For example, `/choose` accepts comma-separated options, and `/userinfo` can take an optional member.
+
+Server messages earn 15–25 XP, with a one-minute cooldown per member. Each 100 XP advances a level. `/level` shows your progress (or another member’s), and `/leaderboard` ranks the server. Progress is stored in the existing `level.db` SQLite file; no database migration is needed for this upgrade. Back up that file with the bot’s data. If you later run multiple bot instances or move to managed hosting, migrate the data to a shared database such as PostgreSQL.
+
+`/countingstart` starts a channel-local counting game at 1. Members take turns posting the next number; a wrong number or consecutive turn ends the game and shows the score. `/countingstop` ends it early. Counting requires the **Message Content Intent** to be enabled for the bot in the Discord Developer Portal, in addition to `GatewayIntentBits.MessageContent` in the code.
+
+`/tictactoe` starts an interactive button game. Leave `opponent` empty to play against the computer, or select a server member for multiplayer. Multiplayer games choose the first player at random; solo games use an unbeatable computer opponent. Games expire after five minutes of inactivity.
 
 `/dm` accepts a Discord user ID and can reach users who are not members of the current server. It requires the **Manage Messages** permission. In embed mode, configure `embed_author`, `embed_author_url`, `embed_author_icon_url`, `embed_title`, `embed_description`, `embed_url`, `embed_color`, `embed_image_url`, `embed_thumbnail_url`, `embed_footer`, `embed_footer_icon_url`, and `embed_timestamp`. The `message` option remains a fallback description. `embed_fields` accepts one `Name | Value` pair per line (up to 25 fields). Optional `hide_sender` and `hide_guild` settings hide attribution; both are shown by default. Replies the recipient sends to the bot in the next 24 hours are posted in channel `889153321359769690`. The recipient must allow DMs from the bot.
+
+`/send` posts a message or a customized embed in a selected server text channel. It uses the same embed options as `/dm` and requires **Manage Messages** permission. The bot needs permission to send messages and embeds in the target channel. Mentions are disabled to prevent accidental pings.
 
 ## Permissions
 
