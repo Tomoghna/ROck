@@ -49,8 +49,11 @@ Remove that setting to register commands globally. Keep `.env` private; it is ex
 | **Server & profiles** | `/membercount`, `/serverinfo`, `/userinfo`, `/avatar` |
 | **For fun** | `/slap`, `/bulla`, `/joke`, `/quote`, `/wiki` |
 | **Moderation** | `/kick`, `/mute`, `/unmute`, `/warn` |
+| **Messaging** | `/dm` |
 
 Commands with options guide you through their inputs in Discord. For example, `/choose` accepts comma-separated options, and `/userinfo` can take an optional member.
+
+`/dm` accepts a Discord user ID and can reach users who are not members of the current server. It requires the **Manage Messages** permission. In embed mode, configure `embed_author`, `embed_author_url`, `embed_author_icon_url`, `embed_title`, `embed_description`, `embed_url`, `embed_color`, `embed_image_url`, `embed_thumbnail_url`, `embed_footer`, `embed_footer_icon_url`, and `embed_timestamp`. The `message` option remains a fallback description. `embed_fields` accepts one `Name | Value` pair per line (up to 25 fields). Optional `hide_sender` and `hide_guild` settings hide attribution; both are shown by default. Replies the recipient sends to the bot in the next 24 hours are posted in channel `889153321359769690`. The recipient must allow DMs from the bot.
 
 ## Permissions
 
